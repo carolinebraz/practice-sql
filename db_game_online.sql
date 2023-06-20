@@ -1,7 +1,8 @@
+#Cria banco de dados
 CREATE DATABASE db_game_online;
-
 USE db_game_online;
 
+#Cria tabela de classes
 CREATE TABLE tb_classes(
 	id INT AUTO_INCREMENT NOT NULL,
 	classe VARCHAR(50) NOT NULL,
@@ -9,6 +10,7 @@ CREATE TABLE tb_classes(
 	PRIMARY KEY (id) 
 );
 
+#Cria tabela de personagens
 CREATE TABLE tb_personagens(
 	id INT AUTO_INCREMENT NOT NULL,
 	nome VARCHAR(255) NOT NULL,
@@ -20,6 +22,7 @@ CREATE TABLE tb_personagens(
 	CONSTRAINT fk_personagens_classes FOREIGN KEY (classes_id) REFERENCES tb_classes (id)
 );
 
+#Insere valores na tabela classes
 INSERT INTO tb_classes(classe, descricao)
 VALUES ('Arqueiro','Especialista em combates à longa distância');
 INSERT INTO tb_classes(classe, descricao)
@@ -31,6 +34,7 @@ VALUES ('Paladino','Especialista em defesa da honra e da justiça');
 INSERT INTO tb_classes(classe, descricao)
 VALUES ('Clérigo','Especialista em cura e proteção');
 
+#Insere valores na tabela personagens
 INSERT INTO tb_personagens(nome, exp, poder_de_fogo, armadura, classes_id)
 VALUES ('Arcus Sperans', 10, 5000, 4000, 1);
 INSERT INTO tb_personagens(nome, exp, poder_de_fogo, armadura, classes_id)
@@ -54,15 +58,15 @@ SELECT * FROM tb_personagens WHERE poder_de_fogo > 2000;
 #Seleciona todos os registros da tabela personagens onde armadura está entre 500 e 1000
 SELECT * FROM tb_personagens WHERE armadura BETWEEN 500 AND 1000;
 
-#Seleciona todos os registros da tabela produtos onde nome contém a letra "m"
+#Seleciona todos os registros da tabela personagens onde nome contém a letra "m"
 SELECT * FROM tb_personagens WHERE nome LIKE '%m%'; 
 
 #Seleciona todos os registros da tabela produtos e categorias
 SELECT * FROM tb_personagens
 INNER JOIN tb_classes ON tb_classes.id = tb_personagens.classes_id;
 
-#Seleciona todos os registros da tabela produtos pertencentes a categoria "esquadrias"
-SELECT 
+#Seleciona todos os registros da tabela personagens pertencentes a categoria "Arqueiro"
+SELECT
 	p.id,
     p.nome,
     p.exp,
